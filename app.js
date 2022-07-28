@@ -5,7 +5,7 @@ const menu = [
     category: "Korea",
     price: 10.99,
     img:
-      "https://twoplaidaprons.com/wp-content/uploads/2020/09/tteokbokki-top-down-view- of-tteokbokki-in-a-bowl-500x500.jpg",
+      "https://twoplaidaprons.com/wp-content/uploads/2020/09/tteokbokki-top-down-view-of-tteokbokki-in-a-bowl-500x500.jpg",
     desc: `Spicy rice cakes, serving with fish cake.`,
   },
   {
@@ -81,3 +81,104 @@ const menu = [
     desc: `Red bean paste dessert, serving with honey.`,
   },
 ];
+
+const buttons = document.querySelector('.btn-container');
+const menuItems = document.querySelector('.section-center');
+
+
+// Buttons fonction
+function addButtons(){
+  let buttonsIn =  `
+  <button class="btn btn-outline-dark btn-item" id="All">All</button>
+  <button class="btn btn-outline-dark btn-item" id="Korea">Korea</button>
+  <button class="btn btn-outline-dark btn-item" id="Japan">Japan</button>
+  <button class="btn btn-outline-dark btn-item" id="China">China</button>
+  `
+ buttons.innerHTML = buttonsIn;
+}
+addButtons();
+// Create Menu Items
+
+const createFoods = (food) => {
+let html = `<div class="menu-items col-lg-6 col-sm-12">
+<img src="${food.img}" alt="${food.title}" class="photo">
+<div class="menu-info">
+  <div class="menu-title">
+    <h4>${food.title}</h4>
+    <h4 class="price">${food.price}</h4>
+  </div>
+  <div class="menu-text">
+  ${food.desc}
+  </div>
+</div>
+</div>`
+
+  return html;
+}
+
+// All Foods
+
+function allFoods(){
+  let allFood = " "
+
+  menu.map(item => {
+    allFood += createFoods(item)
+  })
+  menuItems.innerHTML = allFood;
+}
+// Showing Menu at Starting Page
+document.addEventListener("DOMContentLoaded", allFoods)
+
+// Korean Foods
+
+function koreanFoods(){
+let koreanFood = "";
+
+menu.map(item => {
+  if(item.category === "Korea"){
+    koreanFood += createFoods(item)
+  }
+})
+menuItems.innerHTML = koreanFood;
+}
+
+// Korea Button Event Listener
+document.querySelector('#Korea').addEventListener("click",koreanFoods);
+
+// Japan Foods
+
+function japanFoods(){
+  let japanFood = "";
+  
+  menu.map(item => {
+    if(item.category === "Japan"){
+      japanFood += createFoods(item)
+    }
+  })
+  menuItems.innerHTML = japanFood;
+  }
+  
+  // Japan Button Event Listener
+  document.querySelector('#Japan').addEventListener("click",japanFoods);
+
+  // Chinese Foods
+
+  function chineseFoods(){
+    let chineseFood = "";
+    
+    menu.map(item => {
+      if(item.category === "China"){
+        chineseFood += createFoods(item)
+      }
+    })
+    menuItems.innerHTML = chineseFood;
+    }
+    
+    // China Button Event Listener
+    document.querySelector('#China').addEventListener("click",chineseFoods);
+    
+    // All Button Even Listener
+
+    document.querySelector('#All').addEventListener("click",allFoods);
+  
+
